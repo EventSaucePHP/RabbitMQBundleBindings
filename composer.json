@@ -1,5 +1,5 @@
 {
-    "name": "eventsauce/rabbitmq-bundle",
+    "name": "eventsauce/rabbitmq-bundle-bindings",
     "description": "RabbitMQ dispatcher and consumer bindings.",
     "type": "library",
     "autoload": {
