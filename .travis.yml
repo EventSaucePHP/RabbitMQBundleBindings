@@ -13,6 +13,7 @@ install:
 
 before_script:
     - docker-compose -f ./tests/docker-compose.yml up -d
+    - php tests/wait.php
 
 script:
     - vendor/bin/phpunit --coverage-text
