@@ -12,12 +12,12 @@ install:
     - travis_retry composer install
 
 before_script:
-    - docker-compose --file tests/docker-compose.yml -d up
+    - docker-compose -f ./tests/docker-compose.yml up -d
 
 script:
     - vendor/bin/phpunit --coverage-text
 
 after_script:
-    - docker-compose --file tests/docker-compose.yml -d down
+    - docker-compose -f ./tests/docker-compose.yml down
 #    - wget https://scrutinizer-ci.com/ocular.phar
 #    - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
