@@ -1,0 +1,27 @@
+{
+    "name": "eventsauce/rabbitmq-bundle",
+    "description": "RabbitMQ dispatcher and consumer bindings.",
+    "type": "library",
+    "autoload": {
+       "psr-4": {
+            "EventSauce\\RabbitMQ\\": "src",
+            "EventSauce\\RabbitMQ\\Tests\\": "tests"
+       }
+    },
+    "require": {
+        "eventsauce/eventsauce": "@dev",
+        "php-amqplib/rabbitmq-bundle": "^1.12"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~5.7"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Frank de Jonge",
+            "email": "info@frenky.net"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

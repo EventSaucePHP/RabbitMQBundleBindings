@@ -1,0 +1,23 @@
+language: php
+
+services:
+    - docker
+
+php:
+    - 7.1
+
+sudo: false
+
+install:
+    - travis_retry composer install
+
+before_script:
+    - docker-compose --file tests/docker-compose.yml -d up
+
+script:
+    - vendor/bin/phpunit --coverage-text
+
+after_script:
+    - docker-compose --file tests/docker-compose.yml -d down
+#    - wget https://scrutinizer-ci.com/ocular.phar
+#    - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
