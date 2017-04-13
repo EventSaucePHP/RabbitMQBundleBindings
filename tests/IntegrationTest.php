@@ -9,8 +9,6 @@ use EventSauce\RabbitMQ\NaiveExceptionHandler;
 use EventSauce\RabbitMQ\RabbitMQConsumer;
 use EventSauce\RabbitMQ\RabbitMQMessageDispatcher;
 use EventSauce\Time\TestClock;
-use function file_get_contents;
-use function json_decode;
 use OldSound\RabbitMqBundle\RabbitMq\Consumer;
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
@@ -18,9 +16,7 @@ use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Exception\AMQPTimeoutException;
 use PHPUnit\Framework\TestCase;
-use function sleep;
 use Throwable;
-use function usleep;
 
 class IntegrationTest extends TestCase
 {
