@@ -95,6 +95,7 @@ class IntegrationTest extends TestCase
     public function closeConnection()
     {
         try {
+            $this->consumer->stopConsuming();
             $this->consumer->delete();
         } catch (Throwable $ignore) {}
 
