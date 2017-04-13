@@ -138,6 +138,7 @@ class IntegrationTest extends TestCase
 
         $this->consumer->setCallback([$messageConsumer, 'execute']);
         $this->consumer->consume(1);
+        $this->assertEquals(1, $exceptionThrower->counter);
     }
 
     /**
@@ -159,8 +160,9 @@ class IntegrationTest extends TestCase
         try {
             $this->consumer->consume(2);
         } catch (AMQPTimeoutException $idledTooLong) {
-            // ignore this
+
         }
+        $this->assertTrue(isset($idledTooLong));
         $this->assertEquals(1, $exceptionThrower->counter);
     }
 }
