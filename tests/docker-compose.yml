@@ -5,8 +5,8 @@ services:
         hostname: rabbit
         environment:
             RABBITMQ_ERLANG_COOKIE: "012794e09e71uoihadsc"
-            RABBITMQ_DEFAULT_USER: "username"
-            RABBITMQ_DEFAULT_PASS: "password"
+            RABBITMQ_DEFAULT_USER: "guest"
+            RABBITMQ_DEFAULT_PASS: "guest"
             RABBITMQ_DEFAULT_VHOST: "/"
         ports:
             - "15672:15672"

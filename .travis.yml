@@ -1,7 +1,7 @@
 language: php
 
 services:
-    - docker
+    - rabbitmq
 
 php:
     - 7.1
@@ -12,14 +12,9 @@ sudo: false
 install:
     - travis_retry composer install
 
-before_script:
-    - docker-compose -f ./tests/docker-compose.yml up -d --force-recreate
-    - php tests/wait.php
-
 script:
     - vendor/bin/phpunit --coverage-text
 
 after_script:
-    - docker-compose -f ./tests/docker-compose.yml down
 #    - wget https://scrutinizer-ci.com/ocular.phar
 #    - php ocular.phar code-coverage:upload --format=php-clover coverage.clover

@@ -46,13 +46,7 @@ class IntegrationTest extends TestCase
      */
     public function setupConnection()
     {
-        $connection = new AMQPStreamConnection(
-            'localhost',
-            '5672',
-            'username',
-            'password'
-        );
-
+        $connection = new AMQPStreamConnection('localhost', '5672', 'guest', 'guest');
         $channel = $connection->channel();
         $queue = 'test.queue';
         $exchange = 'test.exchange';
