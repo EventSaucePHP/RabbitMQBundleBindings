@@ -13,7 +13,7 @@ install:
     - travis_retry composer install
 
 before_script:
-    - docker-compose -f ./tests/docker-compose.yml up -d
+    - docker-compose -f ./tests/docker-compose.yml up -d --force-recreate
     - php tests/wait.php
 
 script:
