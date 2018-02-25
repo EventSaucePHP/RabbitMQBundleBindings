@@ -3,7 +3,7 @@
 $start = time();
 
 while (true) {
-    $response = @file_get_contents('http://username:password@localhost:15672/api/vhosts');
+    $response = @file_get_contents('http://guest:guest@localhost:15672/api/vhosts');
 
     if ($response !== false) {
         fwrite(STDOUT, 'Docker container started!');

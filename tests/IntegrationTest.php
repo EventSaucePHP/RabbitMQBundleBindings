@@ -2,14 +2,13 @@
 
 namespace EventSauce\RabbitMQ\Tests;
 
-use EventSauce\EventSourcing\AggregateRootId;
 use EventSauce\EventSourcing\Message;
 use EventSauce\EventSourcing\Serialization\ConstructingMessageSerializer;
+use EventSauce\EventSourcing\Time\TestClock;
 use EventSauce\EventSourcing\UuidAggregateRootId;
 use EventSauce\RabbitMQ\NaiveExceptionHandler;
 use EventSauce\RabbitMQ\RabbitMQConsumer;
 use EventSauce\RabbitMQ\RabbitMQMessageDispatcher;
-use EventSauce\EventSourcing\Time\TestClock;
 use OldSound\RabbitMqBundle\RabbitMq\Consumer;
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
@@ -88,7 +87,8 @@ class IntegrationTest extends TestCase
         try {
             $this->consumer->stopConsuming();
             $this->consumer->delete();
-        } catch (Throwable $ignore) {}
+        } catch (Throwable $ignore) {
+        }
 
         $this->channel->close();
         $this->connection->close();
@@ -101,8 +101,8 @@ class IntegrationTest extends TestCase
     {
         $serializer = new ConstructingMessageSerializer(UuidAggregateRootId::class);
         $dispatcher = new RabbitMQMessageDispatcher($this->producer, $serializer);
-        $event = new TestEvent(UuidAggregateRootId::create(), (new TestClock())->pointInTime());
-        $message = new Message($event);
+        $event = new TestEvent((new TestClock())->pointInTime());
+        $message = new Message(UuidAggregateRootId::create(), $event);
         $dispatcher->dispatch($message);
 
         $collector = new CollectingConsumer();
@@ -121,8 +121,8 @@ class IntegrationTest extends TestCase
     {
         $serializer = new ConstructingMessageSerializer(UuidAggregateRootId::class);
         $dispatcher = new RabbitMQMessageDispatcher($this->producer, $serializer);
-        $event = new TestEvent(UuidAggregateRootId::create(), (new TestClock())->pointInTime());
-        $message = new Message($event);
+        $event = new TestEvent((new TestClock())->pointInTime());
+        $message = new Message(UuidAggregateRootId::create(), $event);
         $dispatcher->dispatch($message);
 
         $exceptionThrower = new ExceptionThrowingConsumer();
@@ -140,8 +140,8 @@ class IntegrationTest extends TestCase
     {
         $serializer = new ConstructingMessageSerializer(UuidAggregateRootId::class);
         $dispatcher = new RabbitMQMessageDispatcher($this->producer, $serializer);
-        $event = new TestEvent(UuidAggregateRootId::create(), (new TestClock())->pointInTime());
-        $message = new Message($event);
+        $event = new TestEvent((new TestClock())->pointInTime());
+        $message = new Message(UuidAggregateRootId::create(), $event);
         $dispatcher->dispatch($message);
 
         $exceptionThrower = new ExceptionThrowingConsumer();

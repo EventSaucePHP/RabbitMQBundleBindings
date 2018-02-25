@@ -9,18 +9,12 @@ use EventSauce\EventSourcing\PointInTime;
 class TestEvent implements Event
 {
     /**
-     * @var AggregateRootId
-     */
-    private $aggregateRootId;
-
-    /**
      * @var PointInTime
      */
     private $timeOfRecording;
 
-    public function __construct(AggregateRootId $aggregateRootId, PointInTime $timeOfRecording)
+    public function __construct(PointInTime $timeOfRecording)
     {
-        $this->aggregateRootId = $aggregateRootId;
         $this->timeOfRecording = $timeOfRecording;
     }
 
@@ -45,8 +39,8 @@ class TestEvent implements Event
         return [];
     }
 
-    public static function fromPayload(array $payload, AggregateRootId $aggregateRootId, PointInTime $timeOfRecording): Event
+    public static function fromPayload(array $payload, PointInTime $timeOfRecording): Event
     {
-        return new TestEvent($aggregateRootId, $timeOfRecording);
+        return new TestEvent($timeOfRecording);
     }
 }
