@@ -5,7 +5,6 @@ namespace EventSauce\RabbitMQ\Tests;
 use EventSauce\EventSourcing\Message;
 use EventSauce\EventSourcing\Serialization\ConstructingMessageSerializer;
 use EventSauce\EventSourcing\Time\TestClock;
-use EventSauce\EventSourcing\UuidAggregateRootId;
 use EventSauce\RabbitMQ\NaiveExceptionHandler;
 use EventSauce\RabbitMQ\RabbitMQConsumer;
 use EventSauce\RabbitMQ\RabbitMQMessageDispatcher;
@@ -99,10 +98,10 @@ class IntegrationTest extends TestCase
      */
     public function it_works()
     {
-        $serializer = new ConstructingMessageSerializer(UuidAggregateRootId::class);
+        $serializer = new ConstructingMessageSerializer();
         $dispatcher = new RabbitMQMessageDispatcher($this->producer, $serializer);
         $event = new TestEvent((new TestClock())->pointInTime());
-        $message = new Message(UuidAggregateRootId::create(), $event);
+        $message = new Message($event);
         $dispatcher->dispatch($message);
 
         $collector = new CollectingConsumer();
@@ -119,10 +118,10 @@ class IntegrationTest extends TestCase
      */
     public function requeue_rejected_messages()
     {
-        $serializer = new ConstructingMessageSerializer(UuidAggregateRootId::class);
+        $serializer = new ConstructingMessageSerializer();
         $dispatcher = new RabbitMQMessageDispatcher($this->producer, $serializer);
         $event = new TestEvent((new TestClock())->pointInTime());
-        $message = new Message(UuidAggregateRootId::create(), $event);
+        $message = new Message($event);
         $dispatcher->dispatch($message);
 
         $exceptionThrower = new ExceptionThrowingConsumer();
@@ -138,10 +137,10 @@ class IntegrationTest extends TestCase
      */
     public function nacking_messages()
     {
-        $serializer = new ConstructingMessageSerializer(UuidAggregateRootId::class);
+        $serializer = new ConstructingMessageSerializer();
         $dispatcher = new RabbitMQMessageDispatcher($this->producer, $serializer);
         $event = new TestEvent((new TestClock())->pointInTime());
-        $message = new Message(UuidAggregateRootId::create(), $event);
+        $message = new Message($event);
         $dispatcher->dispatch($message);
 
         $exceptionThrower = new ExceptionThrowingConsumer();
