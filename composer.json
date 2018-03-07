@@ -9,7 +9,7 @@
        }
     },
     "require": {
-        "eventsauce/eventsauce": "@dev",
+        "eventsauce/eventsauce": "^0.1.0",
         "php-amqplib/rabbitmq-bundle": "^1.12"
     },
     "require-dev": {
