@@ -6,6 +6,7 @@ use EventSauce\EventSourcing\Message;
 use EventSauce\EventSourcing\MessageDispatcher;
 use EventSauce\EventSourcing\Serialization\MessageSerializer;
 use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
+use function var_dump;
 
 class RabbitMQMessageDispatcher implements MessageDispatcher
 {

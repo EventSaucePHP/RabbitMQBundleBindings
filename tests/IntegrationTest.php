@@ -2,6 +2,7 @@
 
 namespace EventSauce\RabbitMQ\Tests;
 
+use EventSauce\EventSourcing\DefaultHeadersDecorator;
 use EventSauce\EventSourcing\Message;
 use EventSauce\EventSourcing\Serialization\ConstructingMessageSerializer;
 use EventSauce\EventSourcing\Time\TestClock;
@@ -101,7 +102,7 @@ class IntegrationTest extends TestCase
         $serializer = new ConstructingMessageSerializer();
         $dispatcher = new RabbitMQMessageDispatcher($this->producer, $serializer);
         $event = new TestEvent((new TestClock())->pointInTime());
-        $message = new Message($event);
+        $message = (new DefaultHeadersDecorator())->decorate(new Message($event));
         $dispatcher->dispatch($message);
 
         $collector = new CollectingConsumer();
@@ -121,7 +122,7 @@ class IntegrationTest extends TestCase
         $serializer = new ConstructingMessageSerializer();
         $dispatcher = new RabbitMQMessageDispatcher($this->producer, $serializer);
         $event = new TestEvent((new TestClock())->pointInTime());
-        $message = new Message($event);
+        $message = (new DefaultHeadersDecorator())->decorate(new Message($event));
         $dispatcher->dispatch($message);
 
         $exceptionThrower = new ExceptionThrowingConsumer();
@@ -140,7 +141,7 @@ class IntegrationTest extends TestCase
         $serializer = new ConstructingMessageSerializer();
         $dispatcher = new RabbitMQMessageDispatcher($this->producer, $serializer);
         $event = new TestEvent((new TestClock())->pointInTime());
-        $message = new Message($event);
+        $message = (new DefaultHeadersDecorator())->decorate(new Message($event));
         $dispatcher->dispatch($message);
 
         $exceptionThrower = new ExceptionThrowingConsumer();
