@@ -101,7 +101,7 @@ class IntegrationTest extends TestCase
     {
         $serializer = new ConstructingMessageSerializer();
         $dispatcher = new RabbitMQMessageDispatcher($this->producer, $serializer);
-        $event = new TestEvent((new TestClock())->pointInTime());
+        $event = new TestEvent();
         $message = (new DefaultHeadersDecorator())->decorate(new Message($event));
         $dispatcher->dispatch($message);
 
@@ -121,7 +121,7 @@ class IntegrationTest extends TestCase
     {
         $serializer = new ConstructingMessageSerializer();
         $dispatcher = new RabbitMQMessageDispatcher($this->producer, $serializer);
-        $event = new TestEvent((new TestClock())->pointInTime());
+        $event = new TestEvent();
         $message = (new DefaultHeadersDecorator())->decorate(new Message($event));
         $dispatcher->dispatch($message);
 
@@ -140,7 +140,7 @@ class IntegrationTest extends TestCase
     {
         $serializer = new ConstructingMessageSerializer();
         $dispatcher = new RabbitMQMessageDispatcher($this->producer, $serializer);
-        $event = new TestEvent((new TestClock())->pointInTime());
+        $event = new TestEvent();
         $message = (new DefaultHeadersDecorator())->decorate(new Message($event));
         $dispatcher->dispatch($message);
 
