@@ -3,7 +3,7 @@ sudo: false
 language: php
 
 services:
-    - rabbitmq
+    - docker
 
 php:
     - 7.2
@@ -18,9 +18,10 @@ matrix:
 
 install:
     - travis_retry composer install
+    - docker-compose -f ./tests/docker-compose.yml up -d
+    - php ./tests/wait.php
 
 script:
-    - php ./tests/wait.php
     - vendor/bin/phpunit --coverage-text
 
 # after_script:
