@@ -1,19 +1,26 @@
 <?php
 
+include __DIR__.'/../vendor/autoload.php';
+
+use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Exception\AMQPConnectionClosedException;
+
 $start = time();
 
 while (true) {
-    $response = @file_get_contents('http://guest:guest@localhost:15672/api/vhosts');
-
-    if ($response !== false) {
+    start:
+    try {
+        /** @var AMQPStreamConnection $connection */
+        $connection = include __DIR__.'/setup-connection.php';
+        $connection->close();
         fwrite(STDOUT, 'Docker container started!');
         exit(0);
-    }
-
-    $elapsed = time() - $start;
-    if ($elapsed > 30) {
-        fwrite(STDERR, 'Docker container did not start in time...' . PHP_EOL);
-        exit(1);
+    } catch (AMQPConnectionClosedException $closedException) {
+        $elapsed = time() - $start;
+        if ($elapsed > 30) {
+            fwrite(STDERR, 'Docker container did not start in time...' . PHP_EOL);
+            exit(1);
+        }
     }
 
     fwrite(STDOUT, 'Waiting for container to start...' . PHP_EOL);
