@@ -20,6 +20,7 @@ install:
     - travis_retry composer install
 
 script:
+    - php ./tests/wait.php
     - vendor/bin/phpunit --coverage-text
 
 # after_script:
