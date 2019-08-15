@@ -5,7 +5,6 @@ namespace EventSauce\RabbitMQ\Tests;
 use EventSauce\EventSourcing\DefaultHeadersDecorator;
 use EventSauce\EventSourcing\Message;
 use EventSauce\EventSourcing\Serialization\ConstructingMessageSerializer;
-use EventSauce\EventSourcing\Time\TestClock;
 use EventSauce\RabbitMQ\NaiveExceptionHandler;
 use EventSauce\RabbitMQ\RabbitMQConsumer;
 use EventSauce\RabbitMQ\RabbitMQMessageDispatcher;
